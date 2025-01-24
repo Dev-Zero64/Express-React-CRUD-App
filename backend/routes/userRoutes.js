@@ -3,78 +3,67 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 
-router.post('/login', (req, res) => {
-  const { user_name, user_password } = req.body;
-  db.query('SELECT * FROM users WHERE user_name = ?', [user_name], (err, data) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send(err);
-    } else if (data.length === 0) {
+router.post('/login', async (req, res) => {
+  try {
+    const { user_name, user_password } = req.body;
+    const user = await db.get('SELECT * FROM users WHERE user_name = ?', [user_name]);
+    
+    if (!user) {
       res.status(401).send('Invalid credentials');
       console.log(`${new Date().toString()}: Invalid credentials`);
-    } else {
-      const user = data[0];
-      bcrypt.compare(user_password, user.user_password, (err, result) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send('Error comparing passwords');
-        } else if (result) {
-          res.send(user);
-          console.log(`${new Date().toString()}: Login successful`);
-        } else {
-          res.status(401).send('Invalid credentials');
-          console.log(`${new Date().toString()}: Invalid credentials`);
-        }
-      });
+      return;
     }
-  });
+
+    const match = await bcrypt.compare(user_password, user.user_password);
+    if (match) {
+      res.send(user);
+      console.log(`${new Date().toString()}: Login successful`);
+    } else {
+      res.status(401).send('Invalid credentials');
+      console.log(`${new Date().toString()}: Invalid credentials`);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error during login');
+  }
 });
 
 router.post('/register', async (req, res) => {
-  const { user_name, user_password } = req.body;
   try {
+    const { user_name, user_password } = req.body;
     const hashedPassword = await bcrypt.hash(user_password, 10);
-    db.query('INSERT INTO users (user_name, user_password) VALUES (?, ?)',
-      [user_name, hashedPassword],
-      (err) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send('Error registering user');
-        } else {
-          res.send({ user_name });
-          console.log(`${new Date().toString()}: User registered: ${JSON.stringify(req.body)}`);
-        }
-      }
+    const result = await db.run(
+      'INSERT INTO users (user_name, user_password) VALUES (?, ?)',
+      [user_name, hashedPassword]
     );
+    res.send({ user_id: result.lastID, user_name });
+    console.log(`${new Date().toString()}: User registered: ${user_name}`);
   } catch (err) {
     console.error(err);
     res.status(500).send('Error registering user');
   }
 });
 
-router.get('/data', (req, res)=>{
-  db.query('SELECT user_id, user_name FROM users', (err, data)=>{
-    if (err){
-      console.log(err)
-      res.status(500).send(err)
-    }
-    else{
-      res.json(data);
-    }
-  })
-})
+router.get('/data', async (req, res) => {
+  try {
+    const data = await db.all('SELECT user_id, user_name FROM users');
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+});
 
-router.delete('/delete/:id', (req, res) => {
-  const { id } = req.params;
-  db.query('DELETE FROM users WHERE user_id = ?', [id], (err) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error deleting product');
-    } else {
-      res.send(`User with ID ${id} deleted`);
-      console.log(`${new Date().toString()}: User ID ${id} deleted`);
-    }
-  });
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await db.run('DELETE FROM users WHERE user_id = ?', [id]);
+    res.send(`User with ID ${id} deleted`);
+    console.log(`${new Date().toString()}: User ID ${id} deleted`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error deleting user');
+  }
 });
 
 module.exports = router;
