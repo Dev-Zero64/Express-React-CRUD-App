@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import React from "react";
 
-export default function ProductsForm() {
+export const ProductsForm = () => {
   const [formData, setFormData] = useState({
     product_name: "",
     product_price: "",
@@ -150,4 +149,4 @@ export default function ProductsForm() {
       </form>
     </div>
   );
-}
+};

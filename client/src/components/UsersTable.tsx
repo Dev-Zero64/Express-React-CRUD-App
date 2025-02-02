@@ -7,7 +7,7 @@ interface User {
   user_name: string;
 }
 
-export default function UsersTable() {
+export const UsersTable = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -101,4 +101,4 @@ export default function UsersTable() {
       </div>
     </div>
   );
-}
+};

@@ -1,12 +1,10 @@
-import Navbar from "../components/Navbar";
+import { Navbar } from "../components/Navbar";
 
 export const Home = () => {
   return (
     <div>
       <Navbar />
-      <div className="content-center text-center mt-80">
-        This is the Home Page
-      </div>
+      <div className=" mx-auto p-4 bg-gray-900 min-h-screen"></div>
     </div>
   );
 };

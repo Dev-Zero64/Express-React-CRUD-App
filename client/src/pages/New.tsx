@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import ProductsForm from "../components/ProductsForm";
+import { Navbar } from "../components/Navbar";
+import { ProductsForm } from "../components/ProductsForm";
 
 export const New = () => {
   return (

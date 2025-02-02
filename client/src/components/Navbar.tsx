@@ -56,7 +56,7 @@ const MobileNavigationItemComponent = ({ item }: { item: NavigationItem }) => (
   </Disclosure.Button>
 );
 
-export default function Navbar() {
+export const Navbar = () => {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -101,4 +101,4 @@ export default function Navbar() {
       )}
     </Disclosure>
   );
-}
+};

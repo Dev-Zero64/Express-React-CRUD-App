@@ -1,5 +1,5 @@
-import Navbar from "../components/Navbar";
-import UsersTable from "../components/UsersTable";
+import { Navbar } from "../components/Navbar";
+import { UsersTable } from "../components/UsersTable";
 
 export const Users = () => {
   return (
