@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Register } from "./pages/Register";
-import Database from "./pages/Database";
+import { Database } from "./pages/Database";
 import { Users } from "./pages/Users";
 import { Home } from "./pages/Home";
 import { New } from "./pages/New";
