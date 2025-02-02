@@ -48,48 +48,54 @@ O backend foi desenvolvido utilizando Node.js com Express. A estrutura de pastas
 ### Passos
 
 1. Clone o repositório:
-    ```sh
-    git clone https://github.com/seu-usuario/seu-repositorio.git
-    cd seu-repositorio
-    ```
+
+   ```sh
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   cd seu-repositorio
+   ```
 
 2. Configure o banco de dados MySQL com as credenciais no arquivo `.env`:
-    ```env
-    PORT="Sua porta desejada"
-    DB_HOST="localhost"
-    DB_USER="root"
-    DB_PASSWORD="Sua senha"
-    DB_NAME="Nome do seu banco de dados"
-    ```
+
+   ```env
+   PORT="Sua porta desejada"
+   DB_HOST="localhost"
+   DB_USER="root"
+   DB_PASSWORD="Sua senha"
+   DB_NAME="Nome do seu banco de dados"
+   ```
 
 3. Instale as dependências do backend:
-    ```sh
-    cd backend
-    npm install
-    ```
+
+   ```sh
+   cd backend
+   npm install
+   ```
 
 4. Inicie o servidor backend:
-    ```sh
-    npm run server
-    ```
+
+   ```sh
+   npm run server
+   ```
 
 5. Instale as dependências do frontend:
-    ```sh
-    cd ../frontend
-    npm install
-    ```
+
+   ```sh
+   cd ../frontend
+   npm install
+   ```
 
 6. Inicie o servidor frontend:
-    ```sh
-    npm start
-    ```
+   ```sh
+   npm start
+   ```
 
 ## Uso
 
 1. Acesse a aplicação no navegador:
-    ```
-    http://localhost:3000
-    ```
+
+   ```
+   http://localhost:3000
+   ```
 
 2. Utilize as funcionalidades de login, gerenciamento de produtos e usuários conforme necessário.
 
@@ -97,17 +103,17 @@ O backend foi desenvolvido utilizando Node.js com Express. A estrutura de pastas
 
 1. Faça um fork do projeto.
 2. Crie uma nova branch:
-    ```sh
-    git checkout -b minha-feature
-    ```
+   ```sh
+   git checkout -b minha-feature
+   ```
 3. Faça suas alterações e commit:
-    ```sh
-    git commit -m 'Minha nova feature'
-    ```
+   ```sh
+   git commit -m 'Minha nova feature'
+   ```
 4. Envie para o repositório remoto:
-    ```sh
-    git push origin minha-feature
-    ```
+   ```sh
+   git push origin minha-feature
+   ```
 5. Abra um Pull Request.
 
 ## Licença
