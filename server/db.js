@@ -13,9 +13,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
   console.log('Database connected');
 });
 
-/**
- * Função para criar a tabela de produtos.
- */
+//Função para criar a tabela de produtos.
 async function createProductTable() {
   const sql = `
     CREATE TABLE IF NOT EXISTS product (
@@ -34,9 +32,7 @@ async function createProductTable() {
   }
 }
 
-/**
- * Função para criar a tabela de usuários.
- */
+//Função para criar a tabela de usuários.
 async function createUserTable() {
   const sql = `
     CREATE TABLE IF NOT EXISTS users (
@@ -54,9 +50,7 @@ async function createUserTable() {
   }
 }
 
-/**
- * Inicializa o banco de dados e cria as tabelas necessárias.
- */
+//Inicializa o banco de dados e cria as tabelas necessárias.
 async function initializeDatabase() {
   try {
     await createProductTable();

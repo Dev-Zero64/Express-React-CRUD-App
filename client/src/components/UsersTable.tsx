@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-// Define a interface para os usuários
-interface User {
-  user_id: number;
-  user_name: string;
-}
+import { User } from "../types/User";
 
 export const UsersTable = () => {
   const [users, setUsers] = useState<User[]>([]);

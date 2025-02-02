@@ -1,20 +1,8 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
-// Define a interface para os itens de navegação
-interface NavigationItem {
-  name: string;
-  href: string;
-  current?: boolean; // Adicionamos um campo opcional para indicar se o item é o atual
-}
-
-const navigation: NavigationItem[] = [
-  { name: "Home", href: "/" },
-  { name: "New User", href: "/registerUsers" },
-  { name: "View Users", href: "/viewUsers" },
-  { name: "View Database", href: "/viewDatabase" },
-  { name: "New", href: "/new" },
-];
+import { NavigationItem } from "../types/NavigationItem";
+import { navigation } from "../types/NavigationItem";
+import { Link } from "react-router-dom";
 
 // Função utilitária para concatenar classes CSS
 function classNames(...classes: string[]) {
@@ -23,9 +11,9 @@ function classNames(...classes: string[]) {
 
 // Subcomponente para renderizar itens de navegação
 const NavigationItemComponent = ({ item }: { item: NavigationItem }) => (
-  <a
+  <Link
     key={item.name}
-    href={item.href}
+    to={item.href}
     className={classNames(
       item.current
         ? "bg-gray-900 text-white"
@@ -35,15 +23,14 @@ const NavigationItemComponent = ({ item }: { item: NavigationItem }) => (
     aria-current={item.current ? "page" : undefined}
   >
     {item.name}
-  </a>
+  </Link>
 );
 
 // Subcomponente para renderizar itens de navegação no menu mobile
 const MobileNavigationItemComponent = ({ item }: { item: NavigationItem }) => (
-  <Disclosure.Button
+  <Link
     key={item.name}
-    as="a"
-    href={item.href}
+    to={item.href}
     className={classNames(
       item.current
         ? "bg-gray-900 text-white"
@@ -53,7 +40,7 @@ const MobileNavigationItemComponent = ({ item }: { item: NavigationItem }) => (
     aria-current={item.current ? "page" : undefined}
   >
     {item.name}
-  </Disclosure.Button>
+  </Link>
 );
 
 export const Navbar = () => {
